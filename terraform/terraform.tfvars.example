@@ -1,0 +1,30 @@
+# Example terraform.tfvars file
+# Copy this to terraform.tfvars and update with your actual values
+
+# Basic Configuration
+resource_group_name   = "rg-traffic-mgr-citrix-example"
+location             = "West US"
+traffic_manager_name = "traffic-mgr-citrix-prod-example"
+
+# Network Endpoints (Update with your actual IPs)
+primary_public_ip = "203.0.113.10"   # Replace with your primary ISP IP
+backup_public_ip  = "198.51.100.35"  # Replace with your backup ISP IP
+
+# Health Monitoring
+monitor_path                 = "/logon/LogonPoint/index.html"  # Update for your Citrix path
+monitor_interval            = 30
+monitor_timeout             = 10
+monitor_failures_tolerated  = 3
+
+# Cold Standby Configuration
+backup_endpoint_enabled = false  # Keep false for cold standby
+enable_automation      = true   # Enable automatic failover
+
+# Tagging
+tags = {
+  Environment = "Production"
+  Project     = "Citrix-Failover"
+  Client      = "Your-Organization"
+  ManagedBy   = "Terraform"
+  CostCenter  = "IT-Infrastructure"
+} 
