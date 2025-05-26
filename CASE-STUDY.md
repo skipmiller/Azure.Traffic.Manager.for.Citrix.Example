@@ -11,13 +11,20 @@ This case study demonstrates the implementation of an Azure Traffic Manager solu
 - **Single Point of Failure:** Primary ISP outage would disable remote access for all users
 - **Cost Constraints:** Keeping dual ISP connections active 24/7 was cost-prohibitive
 - **Manual Processes:** Existing failover required manual DNS changes with 15-30 minute downtime
+- **Automation Reliability:** Previous Logic App-based solutions proved unreliable
 
 ### Requirements
-- **RTO (Recovery Time Objective):** < 2 minutes
+- **RTO (Recovery Time Objective):** < 5 minutes
 - **RPO (Recovery Point Objective):** 0 (no data loss acceptable)
 - **Cost Optimization:** Backup ISP only active during outages
 - **Automation:** No manual intervention required for failover
 - **Monitoring:** Proactive alerting for all stakeholders
+- **Reliability:** Robust automation that works when needed
+
+## Technical Solution
+
+### Architecture Overview
+The solution implements a **cold standby** configuration using Azure Traffic Manager with webhook-based automation:
 
 ## Technical Solution
 

@@ -1,30 +1,45 @@
-# Example terraform.tfvars file
-# Copy this to terraform.tfvars and update with your actual values
+# Azure Traffic Manager Configuration Example
+# Copy this file to terraform.tfvars and customize with your values
 
-# Basic Configuration
-resource_group_name   = "rg-traffic-mgr-citrix-example"
-location             = "West US"
-traffic_manager_name = "traffic-mgr-citrix-prod-example"
+# Resource Group Configuration
+resource_group_name = "rg-traffic-manager-citrix-prod"
+location           = "West US 2"
 
-# Network Endpoints (Update with your actual IPs)
-primary_public_ip = "203.0.113.10"   # Replace with your primary ISP IP
-backup_public_ip  = "198.51.100.35"  # Replace with your backup ISP IP
+# Traffic Manager Configuration
+traffic_manager_name = "tm-citrix-failover-prod"
 
-# Health Monitoring
-monitor_path                 = "/logon/LogonPoint/index.html"  # Update for your Citrix path
-monitor_interval            = 30
-monitor_timeout             = 10
-monitor_failures_tolerated  = 3
+# ISP Public IP Addresses
+primary_public_ip = "203.0.113.10"   # Replace with your primary ISP public IP
+backup_public_ip  = "198.51.100.35"  # Replace with your backup ISP public IP
 
-# Cold Standby Configuration
-backup_endpoint_enabled = false  # Keep false for cold standby
-enable_automation      = true   # Enable automatic failover
+# Email Notification Recipients
+email_recipients = {
+  primary_admin = {
+    name  = "primary-admin"
+    email = "admin@example.com"
+  }
+  business_contact = {
+    name  = "business-contact" 
+    email = "business@example.com"
+  }
+  network_team = {
+    name  = "network-team"
+    email = "network@example.com"
+  }
+}
 
-# Tagging
-tags = {
+# Alert Configuration
+alert_config = {
+  early_warning_window = "PT1M"   # 1 minute for early warning
+  critical_window      = "PT5M"   # 5 minutes for critical alert
+  evaluation_frequency = "PT1M"   # Check every minute
+}
+
+# Tags
+common_tags = {
   Environment = "Production"
   Project     = "Citrix-Failover"
-  Client      = "Your-Organization"
+  Client      = "Enterprise-Corp"
   ManagedBy   = "Terraform"
-  CostCenter  = "IT-Infrastructure"
+  Purpose     = "Example-Implementation"
 } 
